@@ -1,14 +1,43 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘 뭐 먹지? | 메뉴 추천</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <div class="container">
+        <header>
+            <button id="theme-toggle" class="theme-btn" aria-label="다크모드 토글">🌙</button>
+            <h1>오늘 뭐 먹지?</h1>
+            <p>메뉴를 고민 중인가요? 후보를 입력하면 골라드릴게요.</p>
+        </header>
+
+        <main>
+            <div class="input-group">
+                <input type="text" id="menu-input" placeholder="메뉴를 입력하세요 (예: 김치찌개)" autofocus>
+                <button id="add-btn">추가</button>
+            </div>
+
+            <div class="list-container">
+                <ul id="menu-list"></ul>
+            </div>
+
+            <div class="action-group">
+                <button id="recommend-btn" class="primary-btn">메뉴 추천받기</button>
+                <button id="reset-btn" class="secondary-btn">초기화</button>
+            </div>
+
+            <div id="result-overlay" class="hidden">
+                <div class="result-content">
+                    <h2>오늘의 추천 메뉴!</h2>
+                    <div id="selected-menu"></div>
+                    <button id="close-result">다시 고르기</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>

@@ -1,1 +1,220 @@
-/* Add styles here */
+:root {
+    /* Light Mode Colors */
+    --primary-color: #4a90e2;
+    --secondary-color: #f5f7fa;
+    --accent-color: #ff6b6b;
+    --text-color: #333;
+    --bg-color: #ffffff;
+    --card-bg: #ffffff;
+    --input-border: #eeeeee;
+    --list-item-bg: #f9f9f9;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --overlay-bg: rgba(255, 255, 255, 0.95);
+    --secondary-btn-color: #aaa;
+}
+
+[data-theme="dark"] {
+    /* Dark Mode Colors */
+    --primary-color: #64b5f6;
+    --secondary-color: #1a1a1a;
+    --accent-color: #ff8a80;
+    --text-color: #e0e0e0;
+    --bg-color: #121212;
+    --card-bg: #242424;
+    --input-border: #333333;
+    --list-item-bg: #2d2d2d;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --overlay-bg: rgba(18, 18, 18, 0.98);
+    --secondary-btn-color: #888;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+body {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background: var(--card-bg);
+    width: 90%;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    position: relative;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+.theme-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 50%;
+    line-height: 1;
+}
+
+.theme-btn:hover {
+    background-color: var(--list-item-bg);
+}
+
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+header p {
+    font-size: 0.9rem;
+    color: var(--secondary-btn-color);
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input {
+    flex: 1;
+    padding: 12px 16px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--input-border);
+    border-radius: 12px;
+    outline: none;
+    font-size: 1rem;
+}
+
+input:focus {
+    border-color: var(--primary-color);
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+#add-btn {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#add-btn:hover {
+    opacity: 0.9;
+}
+
+.list-container {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+#menu-list {
+    list-style: none;
+}
+
+#menu-list li {
+    padding: 10px 14px;
+    background: var(--list-item-bg);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.delete-btn {
+    background: none;
+    color: var(--secondary-btn-color);
+    font-size: 0.8rem;
+    padding: 4px 8px;
+}
+
+.delete-btn:hover {
+    color: var(--accent-color);
+}
+
+.action-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.primary-btn {
+    padding: 16px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.1rem;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    padding: 10px;
+    background: none;
+    color: var(--secondary-btn-color);
+    font-size: 0.9rem;
+}
+
+/* Result Overlay */
+#result-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--overlay-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.result-content h2 {
+    font-size: 1.2rem;
+    color: var(--secondary-btn-color);
+    margin-bottom: 20px;
+}
+
+#selected-menu {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+}
+
+#close-result {
+    padding: 12px 30px;
+    background: var(--text-color);
+    color: var(--bg-color);
+}
