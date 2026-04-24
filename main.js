@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactToggle = document.getElementById('contact-toggle');
     const contactSection = document.getElementById('contact-section');
     const closeContactBtn = document.getElementById('close-contact');
+    const guideTrigger = document.getElementById('guide-trigger');
+    const guideModal = document.getElementById('guide-modal');
 
     let menus = JSON.parse(localStorage.getItem('menus')) || [];
     
@@ -118,6 +120,30 @@ document.addEventListener('DOMContentLoaded', () => {
             contactSection.classList.add('hidden');
         }
     });
+
+    // Guide Modal Rollover Logic
+    let isHovering = false;
+
+    const showGuide = () => {
+        isHovering = true;
+        guideModal.classList.remove('hidden');
+    };
+
+    const hideGuide = () => {
+        isHovering = false;
+        setTimeout(() => {
+            if (!isHovering) {
+                guideModal.classList.add('hidden');
+            }
+        }, 100);
+    };
+
+    guideTrigger.addEventListener('mouseenter', showGuide);
+    guideTrigger.addEventListener('mouseleave', hideGuide);
+    
+    // Also keep visible when hovering over the modal content itself
+    guideModal.addEventListener('mouseenter', showGuide);
+    guideModal.addEventListener('mouseleave', hideGuide);
 
     renderList();
 });

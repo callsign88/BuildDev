@@ -322,41 +322,91 @@ button {
 .content-section {
     margin-top: 30px;
     padding: 20px;
-    background: var(--list-item-bg);
+    background: none;
     border-radius: 15px;
-    text-align: left;
-    font-size: 0.9rem;
-    line-height: 1.6;
+    text-align: center;
 }
 
-.content-section h3 {
+.guide-link-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.guide-link {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 12px;
+    transition: all 0.3s;
+}
+
+.guide-link:hover {
+    color: var(--accent-color);
+    background-color: var(--list-item-bg);
+}
+
+/* Guide Modal */
+#guide-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--overlay-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 150;
+    pointer-events: none; /* Overlay itself doesn't block mouse */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#guide-modal:not(.hidden) {
+    opacity: 1;
+}
+
+#guide-modal.hidden {
+    display: none !important;
+}
+
+.guide-content {
+    text-align: left;
+    max-width: 450px !important;
+    pointer-events: auto; /* Content inside can be interacted with if needed */
+}
+
+.guide-content h3 {
     color: var(--primary-color);
     font-size: 1.1rem;
-    margin-top: 15px;
-    margin-bottom: 5px;
-}
-
-.content-section h3:first-child {
-    margin-top: 0;
-}
-
-.content-section p {
-    color: var(--text-color);
     margin-bottom: 10px;
 }
 
-.content-section ol {
+.guide-content p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.guide-list {
     margin-left: 20px;
-    margin-bottom: 10px;
-    color: var(--text-color);
+    margin-bottom: 15px;
 }
 
-.content-section ol li {
-    margin-bottom: 5px;
+.guide-list li {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    line-height: 1.4;
 }
 
-.content-section strong {
-    color: var(--accent-color);
+.mt-20 {
+    margin-top: 20px;
 }
 
 /* Footer & Link Button */
