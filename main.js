@@ -97,6 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
         resultOverlay.classList.add('hidden');
     });
 
+    // Close result overlay when clicking outside
+    resultOverlay.addEventListener('click', (e) => {
+        if (e.target === resultOverlay) {
+            resultOverlay.classList.add('hidden');
+        }
+    });
+
     contactToggle.addEventListener('click', () => {
         contactSection.classList.remove('hidden');
     });
