@@ -302,11 +302,65 @@ button {
     color: var(--bg-color);
 }
 
+/* Content Section for SEO */
+.content-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: var(--list-item-bg);
+    border-radius: 15px;
+    text-align: left;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.content-section h3 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.content-section h3:first-child {
+    margin-top: 0;
+}
+
+.content-section p {
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.content-section ol {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.content-section ol li {
+    margin-bottom: 5px;
+}
+
+.content-section strong {
+    color: var(--accent-color);
+}
+
 /* Footer & Link Button */
 footer {
     margin-top: 20px;
     padding-top: 10px;
     border-top: 1px solid var(--input-border);
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.divider {
+    color: var(--secondary-btn-color);
 }
 
 .link-btn {
@@ -315,6 +369,8 @@ footer {
     font-size: 0.85rem;
     text-decoration: underline;
     cursor: pointer;
+    border: none;
+    font-family: inherit;
 }
 
 .link-btn:hover {

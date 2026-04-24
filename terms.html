@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이용약관 | 오늘 뭐 먹지?</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .policy-container { text-align: left; padding: 20px; line-height: 1.6; }
+        .policy-container h1 { color: var(--primary-color); margin-bottom: 20px; text-align: center;}
+        .policy-container h2 { font-size: 1.2rem; margin-top: 20px; margin-bottom: 10px; color: var(--text-color);}
+        .policy-container p, .policy-container li { font-size: 0.95rem; color: var(--secondary-btn-color); margin-bottom: 10px;}
+        .policy-container ul { margin-left: 20px; margin-bottom: 15px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <a href="index.html" class="header-link">홈으로</a>
+                <button id="theme-toggle" class="theme-btn" aria-label="다크모드 토글">🌙</button>
+            </div>
+        </header>
+        <main>
+            <div class="policy-container card-section">
+                <h1>서비스 이용약관</h1>
+                <p>본 약관은 '오늘 뭐 먹지?' 및 '동물상 테스트' (이하 '본 사이트')가 제공하는 웹서비스의 이용조건 및 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
+                
+                <h2>제1조 (목적)</h2>
+                <p>이 약관은 사용자가 본 사이트에서 제공하는 서비스를 이용함에 있어, 회사와 사용자 간의 권리, 의무, 책임 사항 및 기타 필요한 제반 사항을 규정함을 목적으로 합니다.</p>
+
+                <h2>제2조 (약관의 효력 및 변경)</h2>
+                <ul>
+                    <li>본 약관은 본 사이트 초기 화면에 게시함으로써 그 효력이 발생합니다.</li>
+                    <li>본 사이트는 필요에 따라 관련 법령을 위배하지 않는 범위 내에서 이 약관을 개정할 수 있습니다. 변경된 약관은 적용일자 및 개정 사유를 명시하여 초기 화면에 공지합니다.</li>
+                    <li>사용자는 변경된 약관에 대해 거부할 권리가 있습니다. 본 약관의 변경에 대해 이의가 있는 경우 본 사이트 이용을 중단할 수 있습니다.</li>
+                </ul>
+
+                <h2>제3조 (서비스 제공 및 이용)</h2>
+                <p>본 사이트는 회원가입 절차 없이 기본적으로 누구나 자유롭게 이용할 수 있는 무료 서비스입니다. 메뉴 추천, 랜덤 추첨, 사진 분석 등의 유틸리티 기능을 제공합니다.</p>
+
+                <h2>제4조 (사용자의 의무)</h2>
+                <p>사용자는 본 사이트 이용 시 다음 각 호의 행위를 하여서는 안 됩니다.</p>
+                <ul>
+                    <li>타인의 개인정보를 도용하거나 부정하게 사용하는 행위</li>
+                    <li>본 사이트의 운영을 고의로 방해하는 행위 (해킹, 악성코드 배포 등)</li>
+                    <li>본 사이트가 제공하는 정보를 무단으로 복제, 배포, 상업적으로 이용하는 행위</li>
+                    <li>기타 공공질서 및 미풍양속에 위반되는 행위</li>
+                </ul>
+
+                <h2>제5조 (책임의 한계 및 면책)</h2>
+                <ul>
+                    <li>본 사이트는 천재지변 등 불가항력적인 사유로 서비스를 제공할 수 없는 경우에는 서비스 제공에 대한 책임이 면제됩니다.</li>
+                    <li>본 사이트는 사용자의 귀책사유로 인한 서비스 이용의 장애에 대해 책임을 지지 않습니다.</li>
+                    <li>본 사이트에서 제공하는 '메뉴 추천 결과' 및 '동물상 테스트 결과'는 재미를 위한 오락성 콘텐츠이며, 그 결과의 정확성, 신뢰성 등에 대해 어떠한 법적 책임도 지지 않습니다.</li>
+                </ul>
+
+                <h2>제6조 (준거법 및 재판관할)</h2>
+                <p>본 약관의 해석 및 본 사이트와 사용자 간의 분쟁에 대하여는 대한민국의 법률을 적용하며, 관련 소송이 제기될 경우 민사소송법에 따른 관할 법원을 정합니다.</p>
+
+                <p style="margin-top: 30px; font-size: 0.85rem;">본 이용약관은 2026년 4월 23일부터 적용됩니다.</p>
+            </div>
+        </main>
+    </div>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
+
+        themeToggle.addEventListener('click', () => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const newTheme = theme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.textContent = newTheme === 'light' ? '🌙' : '☀️';
+        });
+    </script>
+</body>
+</html>
