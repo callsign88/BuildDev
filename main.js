@@ -11,6 +11,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactToggle = document.getElementById('contact-toggle');
     const contactSection = document.getElementById('contact-section');
     const closeContactBtn = document.getElementById('close-contact');
+    const startTestBtn = document.getElementById('start-test-btn');
+
+    // Teachable Machine Logic
+    const URL = "https://teachablemachine.withgoogle.com/models/e3Nj0fnrJ/";
+    let tmModel, webcam, labelContainer, maxPredictions;
+
+    async function initTM() {
+        startTestBtn.textContent = "로딩 중...";
+        startTestBtn.disabled = true;
+
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+
+        tmModel = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = tmModel.getTotalClasses();
+
+        const flip = true;
+        webcam = new tmImage.Webcam(200, 200, flip);
+        await webcam.setup();
+        await webcam.play();
+        window.requestAnimationFrame(loopTM);
+
+        document.getElementById("webcam-container").appendChild(webcam.canvas);
+        labelContainer = document.getElementById("label-container");
+        for (let i = 0; i < maxPredictions; i++) {
+            labelContainer.appendChild(document.createElement("div"));
+        }
+        
+        startTestBtn.style.display = 'none';
+    }
+
+    async function loopTM() {
+        webcam.update();
+        await predictTM();
+        window.requestAnimationFrame(loopTM);
+    }
+
+    async function predictTM() {
+        const prediction = await tmModel.predict(webcam.canvas);
+        for (let i = 0; i < maxPredictions; i++) {
+            const classPrediction =
+                prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
+            labelContainer.childNodes[i].innerHTML = classPrediction;
+        }
+    }
+
+    startTestBtn.addEventListener('click', initTM);
 
     let menus = JSON.parse(localStorage.getItem('menus')) || [];
     
