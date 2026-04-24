@@ -11,7 +11,10 @@
 <body>
     <div class="container">
         <header>
-            <button id="theme-toggle" class="theme-btn" aria-label="다크모드 토글">🌙</button>
+            <div class="header-top">
+                <a href="#animal-test-section" class="header-link">동물상Test</a>
+                <button id="theme-toggle" class="theme-btn" aria-label="다크모드 토글">🌙</button>
+            </div>
             <h1>오늘 뭐 먹지?</h1>
             <p>메뉴를 고민 중인가요? 후보를 입력하면 골라드릴게요.</p>
         </header>
@@ -19,10 +22,13 @@
         <!-- Animal Face Test Section -->
         <section id="animal-test-section" class="card-section">
             <h2>강아지상 vs 고양이상 테스트</h2>
-            <p>내 얼굴은 어떤 동물상일까요? 카메라를 켜서 확인해보세요!</p>
+            <p>내 얼굴은 어떤 동물상일까요? 사진을 업로드해 확인해보세요!</p>
             <div class="test-ui">
-                <button type="button" id="start-test-btn" class="primary-btn">테스트 시작하기</button>
-                <div id="webcam-container"></div>
+                <input type="file" id="image-upload" accept="image/*" class="file-input">
+                <label for="image-upload" class="primary-btn">사진 업로드하기</label>
+                <div id="image-preview-container" class="hidden">
+                    <img id="image-preview" alt="업로드된 사진">
+                </div>
                 <div id="label-container"></div>
             </div>
         </section>

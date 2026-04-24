@@ -36,6 +36,10 @@
     transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--secondary-color);
     color: var(--text-color);
@@ -60,10 +64,30 @@ header {
     margin-bottom: 30px;
 }
 
+.header-top {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    position: relative;
+    height: 40px;
+}
+
+.header-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.header-link:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
 .theme-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
     background: none;
     font-size: 1.2rem;
     padding: 8px;
@@ -107,11 +131,29 @@ header p {
     gap: 15px;
 }
 
-#webcam-container {
+.file-input {
+    display: none;
+}
+
+.test-ui label.primary-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#image-preview-container {
     margin: 20px 0;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: var(--card-shadow);
+    max-width: 250px;
+}
+
+#image-preview {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 #label-container {

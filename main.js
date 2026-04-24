@@ -11,53 +11,75 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactToggle = document.getElementById('contact-toggle');
     const contactSection = document.getElementById('contact-section');
     const closeContactBtn = document.getElementById('close-contact');
-    const startTestBtn = document.getElementById('start-test-btn');
+    const imageUpload = document.getElementById('image-upload');
+    const imagePreviewContainer = document.getElementById('image-preview-container');
+    const imagePreview = document.getElementById('image-preview');
+    const labelContainer = document.getElementById('label-container');
 
     // Teachable Machine Logic
     const URL = "https://teachablemachine.withgoogle.com/models/e3Nj0fnrJ/";
-    let tmModel, webcam, labelContainer, maxPredictions;
+    let tmModel, maxPredictions;
+    let isModelLoading = false;
 
-    async function initTM() {
-        startTestBtn.textContent = "로딩 중...";
-        startTestBtn.disabled = true;
-
-        const modelURL = URL + "model.json";
-        const metadataURL = URL + "metadata.json";
-
-        tmModel = await tmImage.load(modelURL, metadataURL);
-        maxPredictions = tmModel.getTotalClasses();
-
-        const flip = true;
-        webcam = new tmImage.Webcam(200, 200, flip);
-        await webcam.setup();
-        await webcam.play();
-        window.requestAnimationFrame(loopTM);
-
-        document.getElementById("webcam-container").appendChild(webcam.canvas);
-        labelContainer = document.getElementById("label-container");
-        for (let i = 0; i < maxPredictions; i++) {
-            labelContainer.appendChild(document.createElement("div"));
+    async function loadModel() {
+        if (tmModel || isModelLoading) return;
+        isModelLoading = true;
+        labelContainer.innerHTML = "<div>모델을 불러오는 중입니다...</div>";
+        try {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+            tmModel = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = tmModel.getTotalClasses();
+            labelContainer.innerHTML = "";
+        } catch (e) {
+            console.error(e);
+            labelContainer.innerHTML = "<div>모델 로딩에 실패했습니다.</div>";
+        } finally {
+            isModelLoading = false;
         }
+    }
+
+    async function predictImage() {
+        if (!tmModel) {
+            await loadModel();
+        }
+        if (!tmModel) return; // failed to load
+
+        labelContainer.innerHTML = "<div>분석 중...</div>";
         
-        startTestBtn.style.display = 'none';
-    }
-
-    async function loopTM() {
-        webcam.update();
-        await predictTM();
-        window.requestAnimationFrame(loopTM);
-    }
-
-    async function predictTM() {
-        const prediction = await tmModel.predict(webcam.canvas);
+        // Predict takes an HTMLImageElement
+        const prediction = await tmModel.predict(imagePreview);
+        
+        labelContainer.innerHTML = "";
         for (let i = 0; i < maxPredictions; i++) {
-            const classPrediction =
-                prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
-            labelContainer.childNodes[i].innerHTML = classPrediction;
+            const div = document.createElement("div");
+            const probability = (prediction[i].probability * 100).toFixed(0);
+            div.innerHTML = `${prediction[i].className}: ${probability}%`;
+            // Highlight the highest probability
+            if (prediction[i].probability > 0.5) {
+                div.style.color = 'var(--primary-color)';
+                div.style.fontWeight = '800';
+            }
+            labelContainer.appendChild(div);
         }
     }
 
-    startTestBtn.addEventListener('click', initTM);
+    imageUpload.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                imagePreview.src = event.target.result;
+                imagePreviewContainer.classList.remove('hidden');
+                
+                // Wait for image to load in DOM before predicting
+                imagePreview.onload = () => {
+                    predictImage();
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 
     let menus = JSON.parse(localStorage.getItem('menus')) || [];
     
