@@ -17,26 +17,27 @@
     <div class="container">
         <header>
             <div class="header-top">
-                <a href="index.html" class="header-link">메뉴 추천 홈</a>
+                <a href="index.html" class="header-link" data-t="home_link">메뉴 추천 홈</a>
+                <button id="lang-toggle" class="lang-btn" data-t="lang_toggle">English</button>
                 <button id="theme-toggle" class="theme-btn" aria-label="다크모드 토글">🌙</button>
             </div>
-            <h1>동물상 테스트</h1>
-            <p>내 얼굴은 어떤 동물상일까요?<br>사진을 업로드해 확인해보세요!</p>
+            <h1 data-t="animal_title">동물상 테스트</h1>
+            <p data-t="animal_subtitle">내 얼굴은 어떤 동물상일까요?<br>사진을 업로드해 확인해보세요!</p>
         </header>
 
         <main>
             <section class="card-section" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
                 <div class="test-ui">
                     <div class="action-options">
-                        <button id="camera-btn" class="secondary-btn">📷 카메라 촬영</button>
-                        <button id="upload-trigger-btn" class="secondary-btn">📁 사진 업로드</button>
+                        <button id="camera-btn" class="secondary-btn" data-t="camera_btn">📷 카메라 촬영</button>
+                        <button id="upload-trigger-btn" class="secondary-btn" data-t="upload_btn">📁 사진 업로드</button>
                     </div>
                     
                     <input type="file" id="image-upload" accept="image/*" class="file-input" style="display: none;">
                     
                     <div id="camera-container" class="hidden">
                         <video id="webcam" autoplay playsinline></video>
-                        <button id="capture-btn" class="primary-btn">찰칵! 촬영하기</button>
+                        <button id="capture-btn" class="primary-btn" data-t="capture_btn">찰칵! 촬영하기</button>
                     </div>
 
                     <div id="image-preview-container" class="hidden">
@@ -44,10 +45,10 @@
                     </div>
 
                     <div class="gender-selection">
-                        <p class="selection-label">성별을 선택해주세요</p>
+                        <p class="selection-label" data-t="gender_label">성별을 선택해주세요</p>
                         <div class="gender-btn-group">
-                            <button class="gender-btn active" data-gender="male">남성</button>
-                            <button class="gender-btn" data-gender="female">여성</button>
+                            <button class="gender-btn active" data-gender="male" data-t="male">남성</button>
+                            <button class="gender-btn" data-gender="female" data-t="female">여성</button>
                         </div>
                     </div>
 
@@ -57,39 +58,40 @@
             
             <section class="content-section">
                 <div class="guide-link-container">
-                    <span id="guide-trigger" class="guide-link">사용방법</span>
+                    <span id="guide-trigger" class="guide-link" data-t="how_to_use">사용방법</span>
                 </div>
             </section>
         </main>
 
         <footer>
             <div class="footer-links">
-                <a href="privacy.html" class="link-btn">개인정보처리방침</a>
+                <a href="privacy.html" class="link-btn" data-t="privacy_btn">개인정보처리방침</a>
                 <span class="divider">|</span>
-                <a href="terms.html" class="link-btn">이용약관</a>
+                <a href="terms.html" class="link-btn" data-t="terms_btn">이용약관</a>
             </div>
         </footer>
 
         <!-- Guide Modal Section -->
         <div id="guide-modal" class="hidden">
             <div class="guide-content result-content">
-                <h3>강아지상 vs 고양이상, 나는 어떤 스타일일까?</h3>
-                <p>연예인들의 얼굴을 보며 흔히 '멍뭉미 넘치는 강아지상' 이라거나 '도도한 매력의 고양이상' 이라는 표현을 많이 씁니다. 이제 <strong>AI 기반 얼굴 분석 테스트</strong>를 통해 쉽고 빠르게 확인해보세요!</p>
+                <h3 data-t="guide_title">강아지상 vs 고양이상, 나는 어떤 스타일일까?</h3>
+                <p data-t="guide_p1">연예인들의 얼굴을 보며 흔히 '멍뭉미 넘치는 강아지상' 이라거나 '도도한 매력의 고양이상' 이라는 표현을 많이 씁니다. 이제 <strong>AI 기반 얼굴 분석 테스트</strong>를 통해 쉽고 빠르게 확인해보세요!</p>
                 
-                <h3 class="mt-20">테스트 방법 안내</h3>
+                <h3 class="mt-20" data-t="guide_subtitle1">테스트 방법 안내</h3>
                 <ol class="guide-list">
-                    <li>상단의 <strong>'사진 업로드하기'</strong> 버튼을 클릭하여 얼굴 사진을 선택합니다.</li>
-                    <li>Google Teachable Machine 기반 AI가 즉시 분석을 시작합니다.</li>
-                    <li>강아지상과 고양이상의 확률이 퍼센트(%)로 표시됩니다.</li>
-                    <li>사진은 서버로 전송되지 않고 브라우저 내에서만 처리되니 안심하세요.</li>
+                    <li data-t="guide_step1">상단의 <strong>'사진 업로드하기'</strong> 버튼을 클릭하여 얼굴 사진을 선택합니다.</li>
+                    <li data-t="guide_step2">Google Teachable Machine 기반 AI가 즉시 분석을 시작합니다.</li>
+                    <li data-t="guide_step3">강아지상과 고양이상의 확률이 퍼센트(%)로 표시됩니다.</li>
+                    <li data-t="guide_step4">사진은 서버로 전송되지 않고 브라우저 내에서만 처리되니 안심하세요.</li>
                 </ol>
 
-                <h3 class="mt-20">대표적인 동물상 특징</h3>
-                <p><strong>🐶 강아지상:</strong> 선한 눈매, 순둥순둥한 매력을 발산합니다. (박보영, 수지 등)</p>
-                <p><strong>🐱 고양이상:</strong> 날렵한 눈꼬리, 도도하고 세련된 매력을 풍깁니다. (한소희, 해린 등)</p>
+                <h3 class="mt-20" data-t="guide_subtitle2">대표적인 동물상 특징</h3>
+                <p><strong data-t="result_dog_male">🐶 강아지상:</strong> <span data-t="result_dog_female">선한 눈매, 순둥순둥한 매력을 발산합니다. (박보영, 수지 등)</span></p>
+                <p><strong data-t="result_cat_male">🐱 고양이상:</strong> <span data-t="result_cat_female">날렵한 눈꼬리, 도도하고 세련된 매력을 풍깁니다. (한소희, 해린 등)</span></p>
             </div>
         </div>
     </div>
+    <script src="translations.js"></script>
     <script src="animal-test.js"></script>
 </body>
 </html>

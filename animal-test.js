@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
+    const langToggle = document.getElementById('lang-toggle');
     const imageUpload = document.getElementById('image-upload');
     const uploadTriggerBtn = document.getElementById('upload-trigger-btn');
     const cameraBtn = document.getElementById('camera-btn');
@@ -15,6 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentGender = 'male';
     let stream = null;
+
+    // Language logic
+    let currentLang = localStorage.getItem('lang') || 'ko';
+    applyTranslations(currentLang);
+
+    langToggle.addEventListener('click', () => {
+        currentLang = currentLang === 'ko' ? 'en' : 'ko';
+        localStorage.setItem('lang', currentLang);
+        applyTranslations(currentLang);
+        if (imagePreview.src && !imagePreviewContainer.classList.contains('hidden')) {
+            predictImage();
+        }
+    });
 
     // Theme logic
     const currentTheme = localStorage.getItem('theme') || 'light';
@@ -36,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.add('active');
             currentGender = btn.dataset.gender;
             
-            // Re-predict if an image is already visible
             if (imagePreview.src && !imagePreviewContainer.classList.contains('hidden')) {
                 predictImage();
             }
@@ -50,10 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
             webcamElement.srcObject = stream;
             cameraContainer.classList.remove('hidden');
             imagePreviewContainer.classList.add('hidden');
-            labelContainer.innerHTML = ""; // Clear previous results
+            labelContainer.innerHTML = "";
         } catch (err) {
             console.error("Camera access denied:", err);
-            alert("카메라에 접근할 수 없습니다. 권한을 확인해주세요.");
+            alert(translations[currentLang].camera_error);
         }
     }
 
@@ -84,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
         imagePreviewContainer.classList.remove('hidden');
         
         stopCamera();
-        // Wait for image to load before prediction
         imagePreview.onload = () => predictImage();
     });
 
@@ -101,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             reader.onload = (event) => {
                 imagePreview.src = event.target.result;
                 imagePreviewContainer.classList.remove('hidden');
-                labelContainer.innerHTML = ""; // Clear previous results
+                labelContainer.innerHTML = "";
                 
                 imagePreview.onload = () => {
                     predictImage();
@@ -112,23 +124,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Teachable Machine Logic
-    const URL = "https://teachablemachine.withgoogle.com/models/e3Nj0fnrJ/";
+    const TM_URL = "https://teachablemachine.withgoogle.com/models/e3Nj0fnrJ/";
     let tmModel, maxPredictions;
     let isModelLoading = false;
 
     async function loadModel() {
         if (tmModel || isModelLoading) return;
         isModelLoading = true;
-        labelContainer.innerHTML = "<div class='loading'>인공지능 모델을 불러오고 있습니다...</div>";
+        labelContainer.innerHTML = `<div class='loading'>${translations[currentLang].loading_model}</div>`;
         try {
-            const modelURL = URL + "model.json";
-            const metadataURL = URL + "metadata.json";
+            const modelURL = TM_URL + "model.json";
+            const metadataURL = TM_URL + "metadata.json";
             tmModel = await tmImage.load(modelURL, metadataURL);
             maxPredictions = tmModel.getTotalClasses();
             labelContainer.innerHTML = "";
         } catch (e) {
             console.error("Model loading failed:", e);
-            labelContainer.innerHTML = "<div class='error'>모델 로딩에 실패했습니다. 인터넷 연결을 확인해주세요.</div>";
+            labelContainer.innerHTML = `<div class='error'>${translations[currentLang].loading_fail}</div>`;
         } finally {
             isModelLoading = false;
         }
@@ -141,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (!tmModel) return;
 
-            labelContainer.innerHTML = "<div class='loading'>이미지 분석 중...</div>";
+            labelContainer.innerHTML = `<div class='loading'>${translations[currentLang].analyzing}</div>`;
             
             const prediction = await tmModel.predict(imagePreview);
             labelContainer.innerHTML = "";
@@ -156,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
             resultTitle.style.fontSize = "1.2rem";
             resultTitle.style.fontWeight = "700";
             
-            // Find highest probability class
             let highest = prediction[0];
             for(let i=1; i<prediction.length; i++) {
                 if(prediction[i].probability > highest.probability) {
@@ -165,18 +176,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             let finalResult = "";
+            const t = translations[currentLang];
             if (highest.className.includes("강아지")) {
-                finalResult = currentGender === 'male' ? "대형견 스타일의 듬직한 강아지상!" : "사랑스러운 멍뭉미 강아지상!";
+                finalResult = currentGender === 'male' ? t.result_dog_male : t.result_dog_female;
             } else if (highest.className.includes("고양이")) {
-                finalResult = currentGender === 'male' ? "시크하고 도도한 매력의 고양이상!" : "눈빛이 매혹적인 팜므파탈 고양이상!";
+                finalResult = currentGender === 'male' ? t.result_cat_male : t.result_cat_female;
             } else {
-                finalResult = `당신은 ${highest.className}!`;
+                finalResult = t.result_fallback.replace("{class}", highest.className);
             }
             
             resultTitle.innerHTML = finalResult;
             labelContainer.appendChild(resultTitle);
 
-            // Detailed class list
             prediction.forEach(p => {
                 const div = document.createElement("div");
                 const probability = (p.probability * 100).toFixed(0);
@@ -199,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } catch (err) {
             console.error("Prediction error:", err);
-            labelContainer.innerHTML = "<div class='error'>분석 중 오류가 발생했습니다. 다시 시도해주세요.</div>";
+            labelContainer.innerHTML = `<div class='error'>${translations[currentLang].error_prediction}</div>`;
         }
     }
 

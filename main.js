@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedMenuDisplay = document.getElementById('selected-menu');
     const closeResultBtn = document.getElementById('close-result');
     const themeToggle = document.getElementById('theme-toggle');
+    const langToggle = document.getElementById('lang-toggle');
     const contactToggle = document.getElementById('contact-toggle');
     const contactSection = document.getElementById('contact-section');
     const closeContactBtn = document.getElementById('close-contact');
@@ -16,6 +17,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let menus = JSON.parse(localStorage.getItem('menus')) || [];
     
+    // Language logic
+    let currentLang = localStorage.getItem('lang') || 'ko';
+    applyTranslations(currentLang);
+
+    langToggle.addEventListener('click', () => {
+        currentLang = currentLang === 'ko' ? 'en' : 'ko';
+        localStorage.setItem('lang', currentLang);
+        applyTranslations(currentLang);
+        renderList(); // Update delete buttons
+    });
+
     // Theme logic
     const currentTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', currentTheme);
@@ -55,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const li = document.createElement('li');
             li.innerHTML = `
                 <span>${menu}</span>
-                <button class="delete-btn" data-index="${index}">삭제</button>
+                <button class="delete-btn" data-index="${index}">${translations[currentLang].delete_btn}</button>
             `;
             menuList.appendChild(li);
         });
@@ -70,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const recommend = () => {
         if (menus.length === 0) {
-            alert('먼저 메뉴 후보를 입력해주세요!');
+            alert(translations[currentLang].alert_no_menu);
             return;
         }
 
@@ -82,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const reset = () => {
-        if (confirm('모든 메뉴를 초기화할까요?')) {
+        if (confirm(translations[currentLang].confirm_reset)) {
             menus = [];
             saveAndRender();
         }

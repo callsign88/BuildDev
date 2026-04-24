@@ -91,16 +91,25 @@ header {
     text-decoration: underline;
 }
 
-.theme-btn {
+.theme-btn, .lang-btn {
     background: none;
-    font-size: 1.2rem;
-    padding: 8px;
-    border-radius: 50%;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 20px;
     line-height: 1;
+    border: 1px solid var(--input-border);
+    color: var(--text-color);
+    font-weight: 600;
+    transition: all 0.2s;
 }
 
-.theme-btn:hover {
+.theme-btn:hover, .lang-btn:hover {
     background-color: var(--list-item-bg);
+    border-color: var(--primary-color);
+}
+
+.lang-btn {
+    font-size: 0.85rem;
 }
 
 header h1 {
