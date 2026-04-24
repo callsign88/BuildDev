@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedMenuDisplay = document.getElementById('selected-menu');
     const closeResultBtn = document.getElementById('close-result');
     const themeToggle = document.getElementById('theme-toggle');
+    const contactToggle = document.getElementById('contact-toggle');
+    const contactSection = document.getElementById('contact-section');
+    const closeContactBtn = document.getElementById('close-contact');
 
     let menus = JSON.parse(localStorage.getItem('menus')) || [];
     
@@ -92,6 +95,21 @@ document.addEventListener('DOMContentLoaded', () => {
     resetBtn.addEventListener('click', reset);
     closeResultBtn.addEventListener('click', () => {
         resultOverlay.classList.add('hidden');
+    });
+
+    contactToggle.addEventListener('click', () => {
+        contactSection.classList.remove('hidden');
+    });
+
+    closeContactBtn.addEventListener('click', () => {
+        contactSection.classList.add('hidden');
+    });
+
+    // Close section when clicking outside the content
+    contactSection.addEventListener('click', (e) => {
+        if (e.target === contactSection) {
+            contactSection.classList.add('hidden');
+        }
     });
 
     renderList();
