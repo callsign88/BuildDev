@@ -238,6 +238,14 @@ footer {
     color: var(--primary-color);
 }
 
+/* Disqus Comments Section */
+#comments-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--input-border);
+    text-align: left;
+}
+
 /* Partnership Form Section */
 #contact-section {
     position: fixed;
