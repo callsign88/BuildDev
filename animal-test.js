@@ -1,9 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
     const imageUpload = document.getElementById('image-upload');
+    const uploadTriggerBtn = document.getElementById('upload-trigger-btn');
+    const cameraBtn = document.getElementById('camera-btn');
+    const cameraContainer = document.getElementById('camera-container');
+    const webcamElement = document.getElementById('webcam');
+    const captureBtn = document.getElementById('capture-btn');
     const imagePreviewContainer = document.getElementById('image-preview-container');
     const imagePreview = document.getElementById('image-preview');
     const labelContainer = document.getElementById('label-container');
+    const guideTrigger = document.getElementById('guide-trigger');
+    const guideModal = document.getElementById('guide-modal');
+    const genderBtns = document.querySelectorAll('.gender-btn');
+
+    let currentGender = 'male';
+    let stream = null;
 
     // Theme logic
     const currentTheme = localStorage.getItem('theme') || 'light';
@@ -18,53 +29,70 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggle.textContent = newTheme === 'light' ? '🌙' : '☀️';
     });
 
-    // Teachable Machine Logic
-    const URL = "https://teachablemachine.withgoogle.com/models/e3Nj0fnrJ/";
-    let tmModel, maxPredictions;
-    let isModelLoading = false;
-
-    async function loadModel() {
-        if (tmModel || isModelLoading) return;
-        isModelLoading = true;
-        labelContainer.innerHTML = "<div>모델을 불러오는 중입니다...</div>";
-        try {
-            const modelURL = URL + "model.json";
-            const metadataURL = URL + "metadata.json";
-            tmModel = await tmImage.load(modelURL, metadataURL);
-            maxPredictions = tmModel.getTotalClasses();
-            labelContainer.innerHTML = "";
-        } catch (e) {
-            console.error(e);
-            labelContainer.innerHTML = "<div>모델 로딩에 실패했습니다.</div>";
-        } finally {
-            isModelLoading = false;
-        }
-    }
-
-    async function predictImage() {
-        if (!tmModel) {
-            await loadModel();
-        }
-        if (!tmModel) return; // failed to load
-
-        labelContainer.innerHTML = "<div>분석 중...</div>";
-        
-        // Predict takes an HTMLImageElement
-        const prediction = await tmModel.predict(imagePreview);
-        
-        labelContainer.innerHTML = "";
-        for (let i = 0; i < maxPredictions; i++) {
-            const div = document.createElement("div");
-            const probability = (prediction[i].probability * 100).toFixed(0);
-            div.innerHTML = `${prediction[i].className}: ${probability}%`;
-            // Highlight the highest probability
-            if (prediction[i].probability > 0.5) {
-                div.style.color = 'var(--primary-color)';
-                div.style.fontWeight = '800';
+    // Gender selection logic
+    genderBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            genderBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentGender = btn.dataset.gender;
+            
+            // Re-predict if an image is already visible
+            if (imagePreview.src && !imagePreviewContainer.classList.contains('hidden')) {
+                predictImage();
             }
-            labelContainer.appendChild(div);
+        });
+    });
+
+    // Camera logic
+    async function startCamera() {
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            webcamElement.srcObject = stream;
+            cameraContainer.classList.remove('hidden');
+            imagePreviewContainer.classList.add('hidden');
+            labelContainer.innerHTML = ""; // Clear previous results
+        } catch (err) {
+            console.error("Camera access denied:", err);
+            alert("카메라에 접근할 수 없습니다. 권한을 확인해주세요.");
         }
     }
+
+    function stopCamera() {
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+            stream = null;
+        }
+        cameraContainer.classList.add('hidden');
+    }
+
+    cameraBtn.addEventListener('click', () => {
+        startCamera();
+    });
+
+    captureBtn.addEventListener('click', () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = webcamElement.videoWidth;
+        canvas.height = webcamElement.videoHeight;
+        const ctx = canvas.getContext('2d');
+        
+        ctx.translate(canvas.width, 0);
+        ctx.scale(-1, 1);
+        ctx.drawImage(webcamElement, 0, 0, canvas.width, canvas.height);
+        
+        const dataUrl = canvas.toDataURL('image/png');
+        imagePreview.src = dataUrl;
+        imagePreviewContainer.classList.remove('hidden');
+        
+        stopCamera();
+        // Wait for image to load before prediction
+        imagePreview.onload = () => predictImage();
+    });
+
+    // Upload logic
+    uploadTriggerBtn.addEventListener('click', () => {
+        stopCamera();
+        imageUpload.click();
+    });
 
     imageUpload.addEventListener('change', (e) => {
         const file = e.target.files[0];
@@ -73,8 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
             reader.onload = (event) => {
                 imagePreview.src = event.target.result;
                 imagePreviewContainer.classList.remove('hidden');
+                labelContainer.innerHTML = ""; // Clear previous results
                 
-                // Wait for image to load in DOM before predicting
                 imagePreview.onload = () => {
                     predictImage();
                 }
@@ -82,4 +110,109 @@ document.addEventListener('DOMContentLoaded', () => {
             reader.readAsDataURL(file);
         }
     });
+
+    // Teachable Machine Logic
+    const URL = "https://teachablemachine.withgoogle.com/models/e3Nj0fnrJ/";
+    let tmModel, maxPredictions;
+    let isModelLoading = false;
+
+    async function loadModel() {
+        if (tmModel || isModelLoading) return;
+        isModelLoading = true;
+        labelContainer.innerHTML = "<div class='loading'>인공지능 모델을 불러오고 있습니다...</div>";
+        try {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+            tmModel = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = tmModel.getTotalClasses();
+            labelContainer.innerHTML = "";
+        } catch (e) {
+            console.error("Model loading failed:", e);
+            labelContainer.innerHTML = "<div class='error'>모델 로딩에 실패했습니다. 인터넷 연결을 확인해주세요.</div>";
+        } finally {
+            isModelLoading = false;
+        }
+    }
+
+    async function predictImage() {
+        try {
+            if (!tmModel) {
+                await loadModel();
+            }
+            if (!tmModel) return;
+
+            labelContainer.innerHTML = "<div class='loading'>이미지 분석 중...</div>";
+            
+            const prediction = await tmModel.predict(imagePreview);
+            labelContainer.innerHTML = "";
+            
+            // Custom Result Title Logic
+            const resultTitle = document.createElement("div");
+            resultTitle.style.marginBottom = "20px";
+            resultTitle.style.padding = "15px";
+            resultTitle.style.borderRadius = "15px";
+            resultTitle.style.background = "var(--primary-color)";
+            resultTitle.style.color = "white";
+            resultTitle.style.fontSize = "1.2rem";
+            resultTitle.style.fontWeight = "700";
+            
+            // Find highest probability class
+            let highest = prediction[0];
+            for(let i=1; i<prediction.length; i++) {
+                if(prediction[i].probability > highest.probability) {
+                    highest = prediction[i];
+                }
+            }
+            
+            let finalResult = "";
+            if (highest.className.includes("강아지")) {
+                finalResult = currentGender === 'male' ? "대형견 스타일의 듬직한 강아지상!" : "사랑스러운 멍뭉미 강아지상!";
+            } else if (highest.className.includes("고양이")) {
+                finalResult = currentGender === 'male' ? "시크하고 도도한 매력의 고양이상!" : "눈빛이 매혹적인 팜므파탈 고양이상!";
+            } else {
+                finalResult = `당신은 ${highest.className}!`;
+            }
+            
+            resultTitle.innerHTML = finalResult;
+            labelContainer.appendChild(resultTitle);
+
+            // Detailed class list
+            prediction.forEach(p => {
+                const div = document.createElement("div");
+                const probability = (p.probability * 100).toFixed(0);
+                
+                div.style.padding = "12px";
+                div.style.background = "var(--list-item-bg)";
+                div.style.borderRadius = "10px";
+                div.style.marginBottom = "8px";
+                div.style.display = "flex";
+                div.style.justifyContent = "space-between";
+                div.style.fontWeight = "600";
+                
+                div.innerHTML = `<span>${p.className}</span> <span>${probability}%</span>`;
+                
+                if (p.className === highest.className) {
+                    div.style.color = 'var(--primary-color)';
+                    div.style.boxShadow = "inset 0 0 0 2px var(--primary-color)";
+                }
+                labelContainer.appendChild(div);
+            });
+        } catch (err) {
+            console.error("Prediction error:", err);
+            labelContainer.innerHTML = "<div class='error'>분석 중 오류가 발생했습니다. 다시 시도해주세요.</div>";
+        }
+    }
+
+    // Guide Modal Rollover Logic
+    let isHovering = false;
+    const showGuide = () => { isHovering = true; guideModal.classList.remove('hidden'); };
+    const hideGuide = () => {
+        isHovering = false;
+        setTimeout(() => { if (!isHovering) guideModal.classList.add('hidden'); }, 100);
+    };
+
+    guideTrigger.addEventListener('mouseenter', showGuide);
+    guideTrigger.addEventListener('mouseleave', hideGuide);
+    guideModal.addEventListener('mouseenter', showGuide);
+    guideModal.addEventListener('mouseleave', hideGuide);
 });

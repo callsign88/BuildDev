@@ -409,6 +409,75 @@ button {
     margin-top: 20px;
 }
 
+.action-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.action-options .secondary-btn {
+    flex: 1;
+    background: var(--list-item-bg);
+    border: 1px solid var(--input-border);
+    padding: 12px;
+}
+
+#camera-container {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#webcam {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 15px;
+    background: #000;
+    transform: scaleX(-1); /* Mirror effect */
+}
+
+.gender-selection {
+    margin-top: 25px;
+    padding: 20px;
+    background: var(--list-item-bg);
+    border-radius: 15px;
+    width: 100%;
+}
+
+.selection-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--secondary-btn-color);
+}
+
+.gender-btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.gender-btn {
+    flex: 1;
+    padding: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 10px;
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.gender-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
 /* Footer & Link Button */
 footer {
     margin-top: 20px;

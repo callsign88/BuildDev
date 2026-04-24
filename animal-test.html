@@ -17,56 +17,78 @@
     <div class="container">
         <header>
             <div class="header-top">
+                <a href="index.html" class="header-link">메뉴 추천 홈</a>
                 <button id="theme-toggle" class="theme-btn" aria-label="다크모드 토글">🌙</button>
             </div>
-            <h1>강아지상 vs 고양이상 테스트</h1>
+            <h1>동물상 테스트</h1>
             <p>내 얼굴은 어떤 동물상일까요?<br>사진을 업로드해 확인해보세요!</p>
         </header>
 
         <main>
             <section class="card-section" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
                 <div class="test-ui">
-                    <input type="file" id="image-upload" accept="image/*" class="file-input">
-                    <label for="image-upload" class="primary-btn">사진 업로드하기</label>
+                    <div class="action-options">
+                        <button id="camera-btn" class="secondary-btn">📷 카메라 촬영</button>
+                        <button id="upload-trigger-btn" class="secondary-btn">📁 사진 업로드</button>
+                    </div>
+                    
+                    <input type="file" id="image-upload" accept="image/*" class="file-input" style="display: none;">
+                    
+                    <div id="camera-container" class="hidden">
+                        <video id="webcam" autoplay playsinline></video>
+                        <button id="capture-btn" class="primary-btn">찰칵! 촬영하기</button>
+                    </div>
+
                     <div id="image-preview-container" class="hidden">
                         <img id="image-preview" alt="업로드된 사진">
                     </div>
+
+                    <div class="gender-selection">
+                        <p class="selection-label">성별을 선택해주세요</p>
+                        <div class="gender-btn-group">
+                            <button class="gender-btn active" data-gender="male">남성</button>
+                            <button class="gender-btn" data-gender="female">여성</button>
+                        </div>
+                    </div>
+
                     <div id="label-container"></div>
                 </div>
             </section>
             
-            <section class="content-section" style="margin-top: 40px;">
-                <article>
-                    <h3>강아지상 vs 고양이상, 나는 어떤 스타일일까?</h3>
-                    <p>연예인들의 얼굴을 보며 흔히 '멍뭉미 넘치는 강아지상' 이라거나 '도도한 매력의 고양이상' 이라는 표현을 많이 씁니다. 그렇다면 나의 얼굴 특징은 어떤 동물상에 더 가까울까요? 이제 <strong>AI 기반 얼굴 분석 테스트</strong>를 통해 쉽고 빠르게 확인해보세요!</p>
-                    
-                    <h3>테스트 방법 안내</h3>
-                    <ol>
-                        <li>상단의 <strong>'사진 업로드하기'</strong> 버튼을 클릭하여 본인의 얼굴이 잘 나온 사진을 선택합니다. 정면을 응시하고 이목구비가 뚜렷한 사진일수록 분석 정확도가 높아집니다.</li>
-                        <li>사진이 업로드되면, 미리 학습된 Google Teachable Machine 기반의 인공지능 모델이 즉시 이미지 분석을 시작합니다.</li>
-                        <li>수 초 내에 강아지상과 고양이상의 확률이 퍼센트(%)로 화면에 표시됩니다. 더 높은 수치를 기록한 쪽이 당신의 대표적인 관상 특징입니다.</li>
-                        <li>업로드된 사진은 오직 <strong>본인의 브라우저 내에서만 처리</strong>되며, 외부 서버로 전송되거나 저장되지 않으므로 안심하고 테스트를 즐기셔도 됩니다.</li>
-                    </ol>
-
-                    <h3>대표적인 동물상 특징 요약</h3>
-                    <ul>
-                        <li><strong>🐶 강아지상 특징:</strong> 선한 눈매, 처진 눈꼬리, 둥글고 부드러운 얼굴형을 가지며 친근하고 순둥순둥한 매력을 발산합니다. 보는 사람에게 편안함과 귀여움을 주는 인상입니다. (대표 연예인: 박보영, 수지 등)</li>
-                        <li><strong>🐱 고양이상 특징:</strong> 날렵한 턱선, 살짝 올라간 눈꼬리, 크고 뚜렷한 눈망울을 가지며 도도하고 세련된 매력을 풍깁니다. 차가워 보이지만 동시에 매혹적이고 신비로운 인상입니다. (대표 연예인: 한소희, 뉴진스 해린 등)</li>
-                    </ul>
-                    <p>결과는 재미와 흥미를 위한 목적으로 제작되었으니, 친구들과 결과를 공유하며 즐거운 시간을 보내보세요!</p>
-                </article>
+            <section class="content-section">
+                <div class="guide-link-container">
+                    <span id="guide-trigger" class="guide-link">사용방법</span>
+                </div>
             </section>
         </main>
 
         <footer>
             <div class="footer-links">
-                <a href="index.html" class="link-btn">메뉴 추천 홈</a>
-                <span class="divider">|</span>
                 <a href="privacy.html" class="link-btn">개인정보처리방침</a>
                 <span class="divider">|</span>
                 <a href="terms.html" class="link-btn">이용약관</a>
             </div>
         </footer>
+
+        <!-- Guide Modal Section -->
+        <div id="guide-modal" class="hidden">
+            <div class="guide-content result-content">
+                <h3>강아지상 vs 고양이상, 나는 어떤 스타일일까?</h3>
+                <p>연예인들의 얼굴을 보며 흔히 '멍뭉미 넘치는 강아지상' 이라거나 '도도한 매력의 고양이상' 이라는 표현을 많이 씁니다. 이제 <strong>AI 기반 얼굴 분석 테스트</strong>를 통해 쉽고 빠르게 확인해보세요!</p>
+                
+                <h3 class="mt-20">테스트 방법 안내</h3>
+                <ol class="guide-list">
+                    <li>상단의 <strong>'사진 업로드하기'</strong> 버튼을 클릭하여 얼굴 사진을 선택합니다.</li>
+                    <li>Google Teachable Machine 기반 AI가 즉시 분석을 시작합니다.</li>
+                    <li>강아지상과 고양이상의 확률이 퍼센트(%)로 표시됩니다.</li>
+                    <li>사진은 서버로 전송되지 않고 브라우저 내에서만 처리되니 안심하세요.</li>
+                </ol>
+
+                <h3 class="mt-20">대표적인 동물상 특징</h3>
+                <p><strong>🐶 강아지상:</strong> 선한 눈매, 순둥순둥한 매력을 발산합니다. (박보영, 수지 등)</p>
+                <p><strong>🐱 고양이상:</strong> 날렵한 눈꼬리, 도도하고 세련된 매력을 풍깁니다. (한소희, 해린 등)</p>
+            </div>
+        </div>
     </div>
     <script src="animal-test.js"></script>
 </body>
