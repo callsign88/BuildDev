@@ -1,6 +1,7 @@
 const translations = {
     ko: {
         blog_link: "Blog",
+        info_link: "Info",
         animal_test_link: "동물상Test",
         home_link: "메뉴 추천 홈",
         lang_toggle: "English",
@@ -114,10 +115,27 @@ const translations = {
         post2_p2: "강아지상은 보통 부드럽고 친근한 인상을 주는 특징이 있으며, 고양이상은 도도하고 세련된 매력을 발산합니다. 이러한 AI 동물상 테스트는 단순한 재미를 넘어, 자신의 첫인상을 객관적으로 파악해볼 수 있는 흥미로운 도구로 활용되고 있습니다.",
         post3_title: "직장인을 위한 건강한 점심 식단 가이드",
         post3_p1: "바쁜 업무 속에서 대충 때우는 식사는 오후 업무 효율을 떨어뜨립니다. 건강한 점심을 위해서는 탄수화물, 단백질, 지방의 균형이 중요합니다. 특히 혈당 스파이크를 방지하기 위해 식이섬유가 풍부한 채소 위주의 반찬을 먼저 섭취하는 것이 좋습니다.",
-        post3_p2: "저희 메뉴 추천 리스트에 '샐러드', '비빔밥', '단백질 위주 식단'을 포함시켜 보세요. 무작위 추천 속에서도 건강을 챙길 수 있는 현명한 리스트 관리가 필요합니다."
+        post3_p2: "저희 메뉴 추천 리스트에 '샐러드', '비빔밥', '단백질 위주 식단'을 포함시켜 보세요. 무작위 추천 속에서도 건강을 챙길 수 있는 현명한 리스트 관리가 필요합니다.",
+        // Info specific
+        info_page_title: "한국 음식 가이드 | 오늘 뭐 먹지?",
+        info_title: "전통과 현대가 어우러진 한국의 맛",
+        info_subtitle: "전 세계가 사랑하는 대표적인 한국 음식을 소개합니다.",
+        food1_title: "비빔밥 (Bibimbap)",
+        food1_desc: "각종 나물, 고기, 계란, 고추장을 넣어 비벼 먹는 음식으로, '조화와 균형'을 상징하는 한국의 대표 요리입니다. 영양학적으로도 완벽한 한 끼 식사로 손꼽힙니다.",
+        food2_title: "불고기 (Bulgogi)",
+        food2_desc: "얇게 썬 소고기를 간장 베이스의 달콤한 양념에 재워 구워낸 요리입니다. 남녀노소 누구나 좋아하며, 한국의 연회나 잔치에 빠지지 않는 단골 메뉴입니다.",
+        food3_title: "김치찌개 (Kimchi Jjigae)",
+        food3_desc: "잘 익은 김치와 돼지고기, 두부를 넣고 푹 끓여낸 한국인의 소울푸드입니다. 매콤하고 칼칼한 국물 맛이 일품이며, 밥 한 그릇을 뚝딱 비우게 만드는 마법의 메뉴입니다.",
+        food4_title: "떡볶이 (Tteokbokki)",
+        food4_desc: "쫄깃한 떡과 어묵을 매콤달콤한 고추장 양념에 졸여 만든 한국의 대표 길거리 음식입니다. 최근에는 전 세계적으로 'K-푸드' 열풍을 일으키고 있는 주역이기도 합니다.",
+        food5_title: "삼겹살 (Samgyeopsal)",
+        food5_desc: "돼지 갈비 부근의 살코기를 불판에 구워 먹는 요리입니다. 쌈채소와 마늘, 쌈장을 곁들여 먹는 독특한 '쌈 문화'를 체험할 수 있는 한국 최고의 회식 메뉴입니다.",
+        food6_title: "잡채 (Japchae)",
+        food6_desc: "당면과 다양한 채소, 고기를 볶아 만든 요리입니다. 고소한 참기름 향과 쫄깃한 식감이 특징이며, 명절이나 생일 등 특별한 날에 즐겨 먹는 정성 가득한 음식입니다."
     },
     en: {
         blog_link: "Blog",
+        info_link: "Info",
         animal_test_link: "Animal Face Test",
         home_link: "Home",
         lang_toggle: "한국어",
@@ -231,7 +249,23 @@ const translations = {
         post2_p2: "Puppy faces usually give a soft and friendly impression, while cat faces exude a chic and sophisticated charm. These AI tests are becoming more than just fun; they're useful tools for objectively understanding your own first impression.",
         post3_title: "Healthy Lunch Guide for Office Workers",
         post3_p1: "Quick meals during busy work hours can decrease afternoon productivity. A healthy lunch requires a balance of carbohydrates, proteins, and fats. It's especially good to start with fiber-rich vegetable side dishes to prevent blood sugar spikes.",
-        post3_p2: "Try including 'Salad', 'Bibimbap', or 'Protein-focused meals' in our recommendation list. Wise list management is key to maintaining health even within random recommendations."
+        post3_p2: "Try including 'Salad', 'Bibimbap', or 'Protein-focused meals' in our recommendation list. Wise list management is key to maintaining health even within random recommendations.",
+        // Info specific
+        info_page_title: "Korean Food Guide | What to Eat Today?",
+        info_title: "Taste of Korea: Tradition Meets Modernity",
+        info_subtitle: "Discover the representative Korean dishes loved globally.",
+        food1_title: "Bibimbap",
+        food1_desc: "A bowl of rice topped with various seasoned vegetables, meat, egg, and gochujang (chili paste). It symbolizes 'harmony and balance' and is considered a nutritionally complete meal.",
+        food2_title: "Bulgogi",
+        food2_desc: "Thinly sliced beef marinated in a sweet soy-based sauce and grilled. A favorite for all ages, often served at Korean banquets and celebrations.",
+        food3_title: "Kimchi Jjigae (Kimchi Stew)",
+        food3_desc: "A soul food made by boiling well-ripened kimchi with pork and tofu. Its spicy and savory broth is perfect for finishing a whole bowl of rice.",
+        food4_title: "Tteokbokki",
+        food4_desc: "Chewy rice cakes and fish cakes simmered in a sweet and spicy chili sauce. A representative street food leading the 'K-food' trend worldwide.",
+        food5_title: "Samgyeopsal (Pork Belly)",
+        food5_desc: "Grilled pork belly meat enjoyed with lettuce wraps, garlic, and ssamjang. It offers a unique 'Ssam culture' experience, popular for social gatherings.",
+        food6_title: "Japchae",
+        food6_desc: "Sweet potato starch noodles stir-fried with various vegetables and meat. Known for its savory sesame oil aroma and chewy texture, often served on special occasions."
     }
 };
 

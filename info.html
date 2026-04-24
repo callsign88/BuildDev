@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="비빔밥, 불고기, 김치찌개 등 전 세계가 사랑하는 다양한 한국 음식을 이미지와 함께 소개합니다. 한국의 맛과 문화를 만나보세요.">
+    <title data-t="info_page_title">한국 음식 가이드 | 오늘 뭐 먹지?</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; padding: 20px; text-align: left; }
+        .food-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow); transition: transform 0.3s ease; }
+        .food-card:hover { transform: translateY(-10px); }
+        .food-img { width: 100%; height: 200px; object-fit: cover; background: #eee; }
+        .food-content { padding: 20px; }
+        .food-content h3 { color: var(--primary-color); margin-bottom: 10px; font-size: 1.3rem; }
+        .food-content p { font-size: 0.95rem; line-height: 1.6; color: var(--text-color); }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 1000px;">
+        <header>
+            <div class="header-top">
+                <a href="index.html" class="header-link" data-t="home_link">홈으로</a>
+                <a href="blog.html" class="header-link" data-t="blog_link">Blog</a>
+                <a href="animal-test.html" class="header-link" data-t="animal_test_link">동물상Test</a>
+                <button id="lang-toggle" class="lang-btn" data-t="lang_toggle">English</button>
+                <button id="theme-toggle" class="theme-btn">🌙</button>
+            </div>
+            <h1 data-t="info_title">전통과 현대가 어우러진 한국의 맛</h1>
+            <p data-t="info_subtitle">전 세계가 사랑하는 대표적인 한국 음식을 소개합니다.</p>
+        </header>
+
+        <main class="info-grid">
+            <!-- Food 1 -->
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=600&q=80" alt="Bibimbap" class="food-img">
+                <div class="food-content">
+                    <h3 data-t="food1_title">비빔밥 (Bibimbap)</h3>
+                    <p data-t="food1_desc">각종 나물, 고기, 계란, 고추장을 넣어 비벼 먹는 음식으로, '조화와 균형'을 상징하는 한국의 대표 요리입니다.</p>
+                </div>
+            </div>
+
+            <!-- Food 2 -->
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1632778149125-96570627774e?auto=format&fit=crop&w=600&q=80" alt="Bulgogi" class="food-img">
+                <div class="food-content">
+                    <h3 data-t="food2_title">불고기 (Bulgogi)</h3>
+                    <p data-t="food2_desc">얇게 썬 소고기를 간장 베이스의 달콤한 양념에 재워 구워낸 요리입니다. 남녀노소 누구나 좋아합니다.</p>
+                </div>
+            </div>
+
+            <!-- Food 3 -->
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=600&q=80" alt="Kimchi Jjigae" class="food-img">
+                <div class="food-content">
+                    <h3 data-t="food3_title">김치찌개 (Kimchi Jjigae)</h3>
+                    <p data-t="food3_desc">잘 익은 김치와 돼지고기, 두부를 넣고 푹 끓여낸 한국인의 소울푸드입니다. 매콤한 국물 맛이 일품입니다.</p>
+                </div>
+            </div>
+
+            <!-- Food 4 -->
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1623341214825-9f4f963727da?auto=format&fit=crop&w=600&q=80" alt="Tteokbokki" class="food-img">
+                <div class="food-content">
+                    <h3 data-t="food4_title">떡볶이 (Tteokbokki)</h3>
+                    <p data-t="food4_desc">쫄깃한 떡과 어묵을 매콤달콤한 고추장 양념에 졸여 만든 한국의 대표 길거리 음식입니다.</p>
+                </div>
+            </div>
+
+            <!-- Food 5 -->
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1621996346565-e3dc146496a1?auto=format&fit=crop&w=600&q=80" alt="Samgyeopsal" class="food-img">
+                <div class="food-content">
+                    <h3 data-t="food5_title">삼겹살 (Samgyeopsal)</h3>
+                    <p data-t="food5_desc">돼지 갈비 부근의 살코기를 불판에 구워 먹는 요리입니다. 쌈채소와 함께 즐기는 문화가 독특합니다.</p>
+                </div>
+            </div>
+
+            <!-- Food 6 -->
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1555126634-323283e090fa?auto=format&fit=crop&w=600&q=80" alt="Japchae" class="food-img">
+                <div class="food-content">
+                    <h3 data-t="food6_title">잡채 (Japchae)</h3>
+                    <p data-t="food6_desc">당면과 다양한 채소, 고기를 볶아 만든 요리입니다. 명절이나 특별한 날에 빠지지 않는 음식입니다.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-links">
+                <button id="contact-toggle" class="link-btn" data-t="contact_btn">제휴 문의하기</button>
+                <span class="divider">|</span>
+                <a href="privacy.html" class="link-btn" data-t="privacy_btn">개인정보처리방침</a>
+                <span class="divider">|</span>
+                <a href="terms.html" class="link-btn" data-t="terms_btn">이용약관</a>
+            </div>
+        </footer>
+
+        <div id="contact-section" class="hidden">
+            <div class="contact-content">
+                <button id="close-contact" class="close-btn">&times;</button>
+                <h2 data-t="contact_title">제휴 문의</h2>
+                <form action="https://formspree.io/f/xpqkkbja" method="POST">
+                    <div class="form-group">
+                        <label for="company" data-t="form_company">업체명</label>
+                        <input type="text" name="company" id="company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-t="form_email">이메일</label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-t="form_message">문의 내용</label>
+                        <textarea name="message" id="message" required></textarea>
+                    </div>
+                    <button type="submit" class="primary-btn" data-t="form_submit">문의 보내기</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="translations.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            const langToggle = document.getElementById('lang-toggle');
+            const contactToggle = document.getElementById('contact-toggle');
+            const contactSection = document.getElementById('contact-section');
+            const closeContactBtn = document.getElementById('close-contact');
+
+            let currentLang = localStorage.getItem('lang') || 'ko';
+            applyTranslations(currentLang);
+
+            langToggle.addEventListener('click', () => {
+                currentLang = currentLang === 'ko' ? 'en' : 'ko';
+                localStorage.setItem('lang', currentLang);
+                applyTranslations(currentLang);
+            });
+
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
+
+            themeToggle.addEventListener('click', () => {
+                const theme = document.documentElement.getAttribute('data-theme');
+                const newTheme = theme === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                themeToggle.textContent = newTheme === 'light' ? '🌙' : '☀️';
+            });
+
+            contactToggle.addEventListener('click', () => contactSection.classList.remove('hidden'));
+            closeContactBtn.addEventListener('click', () => contactSection.classList.add('hidden'));
+            contactSection.addEventListener('click', (e) => {
+                if (e.target === contactSection) contactSection.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
