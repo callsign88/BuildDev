@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="오늘 뭐 먹지? 점심, 저녁 메뉴가 고민될 때 후보를 입력하면 랜덤으로 추천해주는 무료 웹 서비스입니다. 매일 반복되는 메뉴 고민을 덜어보세요!">
-    <meta name="keywords" content="메뉴 추천, 점심 추천, 저녁 추천, 오늘 뭐 먹지, 랜덤 메뉴, 음식 룰렛">
+    <meta name="keywords" content="메뉴 추천, 점심 추천, 저녁 추천, 오늘 뭐 먹지, 랜덤 메뉴, 음식 룰렛, 메뉴 블로그">
     <meta property="og:title" content="오늘 뭐 먹지? | 메뉴 추천">
     <meta property="og:description" content="메뉴를 고민 중인가요? 후보를 입력하면 랜덤으로 골라드릴게요.">
     <meta property="og:type" content="website">
@@ -15,7 +15,8 @@
     <div class="container">
         <header>
             <div class="header-top">
-                <a href="animal-test.html" target="_blank" class="header-link" data-t="animal_test_link">동물상Test</a>
+                <a href="blog.html" class="header-link" data-t="blog_link">Blog</a>
+                <a href="animal-test.html" class="header-link" data-t="animal_test_link">동물상Test</a>
                 <button id="lang-toggle" class="lang-btn" data-t="lang_toggle">English</button>
                 <button id="theme-toggle" class="theme-btn" aria-label="다크모드 토글">🌙</button>
             </div>
@@ -45,6 +46,15 @@
                     <button id="close-result" data-t="close_result_btn">다시 고르기</button>
                 </div>
             </div>
+
+            <!-- Blog Preview Section for SEO -->
+            <section class="blog-preview card-section" style="margin-top: 40px; border-bottom: none;">
+                <h3 data-t="blog_preview_title" style="color: var(--primary-color); margin-bottom: 15px;">최신 블로그 포스트</h3>
+                <div style="text-align: left; font-size: 0.9rem;">
+                    <p style="margin-bottom: 10px;">• <a href="blog.html" style="color: var(--text-color); text-decoration: none;" data-t="post1_title">결정 장애를 극복하는 '랜덤 선택'의 과학</a></p>
+                    <p style="margin-bottom: 10px;">• <a href="blog.html" style="color: var(--text-color); text-decoration: none;" data-t="post2_title">AI가 분석하는 관상, 얼굴 속에 담긴 비밀</a></p>
+                </div>
+            </section>
         </main>
 
         <!-- AdSense Content Section -->
@@ -63,27 +73,16 @@
                 <a href="terms.html" class="link-btn" data-t="terms_btn">이용약관</a>
             </div>
             
-            <!-- Disqus Comments Section -->
             <div id="comments-section">
                 <div id="disqus_thread"></div>
                 <script>
-                    /**
-                    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-                    /*
-                    var disqus_config = function () {
-                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                    };
-                    */
-                    (function() { // DON'T EDIT BELOW THIS LINE
+                    (function() { 
                     var d = document, s = d.createElement('script');
                     s.src = 'https://builddev.disqus.com/embed.js';
                     s.setAttribute('data-timestamp', +new Date());
                     (d.head || d.body).appendChild(s);
                     })();
                 </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
             </div>
         </footer>
 
@@ -111,19 +110,18 @@
             <div class="contact-content">
                 <button id="close-contact" class="close-btn">&times;</button>
                 <h2 data-t="contact_title">제휴 문의</h2>
-                <p data-t="contact_subtitle">함께 성장할 파트너를 기다립니다.</p>
                 <form action="https://formspree.io/f/xpqkkbja" method="POST">
                     <div class="form-group">
                         <label for="company" data-t="form_company">업체명</label>
-                        <input type="text" name="company" id="company" required placeholder="업체명을 입력하세요" data-t-placeholder="form_company_ph">
+                        <input type="text" name="company" id="company" required data-t-placeholder="form_company_ph">
                     </div>
                     <div class="form-group">
                         <label for="email" data-t="form_email">이메일</label>
-                        <input type="email" name="email" id="email" required placeholder="email@example.com" data-t-placeholder="form_email_ph">
+                        <input type="email" name="email" id="email" required data-t-placeholder="form_email_ph">
                     </div>
                     <div class="form-group">
                         <label for="message" data-t="form_message">문의 내용</label>
-                        <textarea name="message" id="message" required placeholder="문의하실 내용을 입력해주세요" data-t-placeholder="form_message_ph"></textarea>
+                        <textarea name="message" id="message" required data-t-placeholder="form_message_ph"></textarea>
                     </div>
                     <button type="submit" class="primary-btn" data-t="form_submit">문의 보내기</button>
                 </form>

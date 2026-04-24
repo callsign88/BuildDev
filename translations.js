@@ -1,5 +1,6 @@
 const translations = {
     ko: {
+        blog_link: "Blog",
         animal_test_link: "동물상Test",
         home_link: "메뉴 추천 홈",
         lang_toggle: "English",
@@ -99,9 +100,24 @@ const translations = {
         delete_btn: "삭제",
         confirm_reset: "모든 메뉴를 초기화할까요?",
         alert_no_menu: "먼저 메뉴 후보를 입력해주세요!",
-        camera_error: "카메라에 접근할 수 없습니다. 권한을 확인해주세요."
+        camera_error: "카메라에 접근할 수 없습니다. 권한을 확인해주세요.",
+        // Blog specific
+        blog_page_title: "블로그 | 오늘 뭐 먹지?",
+        blog_title: "푸드 & 라이프 블로그",
+        blog_subtitle: "더 나은 결정을 위한 유용한 가이드와 이야기",
+        blog_preview_title: "최신 블로그 포스트",
+        post1_title: "결정 장애를 극복하는 '랜덤 선택'의 과학",
+        post1_p1: "우리는 매일 수많은 선택의 기로에 놓입니다. 그중에서도 '오늘 뭐 먹지?'라는 고민은 현대인에게 가장 큰 스트레스 중 하나로 자리 잡았습니다. 심리학자들은 이를 '선택의 역설(Paradox of Choice)'이라고 부릅니다. 선택지가 너무 많을 때 오히려 만족감이 떨어지고 불안감이 커지는 현상입니다.",
+        post1_p2: "이럴 때 랜덤 메뉴 추천 도구를 사용하는 것은 단순히 재미를 넘어 정신적 피로를 줄여주는 효율적인 방법입니다. 결정 권한을 시스템에 맡김으로써 뇌에 휴식을 주고, 예상치 못한 메뉴를 만났을 때의 즐거움까지 얻을 수 있습니다.",
+        post2_title: "AI가 분석하는 관상, 얼굴 속에 담긴 비밀",
+        post2_p1: "최근 Google의 Teachable Machine과 같은 인공지능 기술이 발전하면서, 얼굴 이미지를 통해 동물상을 분석하는 서비스가 큰 인기를 끌고 있습니다. AI는 수만 장의 데이터를 학습하여 눈의 각도, 코의 높이, 입술의 모양 등을 정밀하게 분석합니다.",
+        post2_p2: "강아지상은 보통 부드럽고 친근한 인상을 주는 특징이 있으며, 고양이상은 도도하고 세련된 매력을 발산합니다. 이러한 AI 동물상 테스트는 단순한 재미를 넘어, 자신의 첫인상을 객관적으로 파악해볼 수 있는 흥미로운 도구로 활용되고 있습니다.",
+        post3_title: "직장인을 위한 건강한 점심 식단 가이드",
+        post3_p1: "바쁜 업무 속에서 대충 때우는 식사는 오후 업무 효율을 떨어뜨립니다. 건강한 점심을 위해서는 탄수화물, 단백질, 지방의 균형이 중요합니다. 특히 혈당 스파이크를 방지하기 위해 식이섬유가 풍부한 채소 위주의 반찬을 먼저 섭취하는 것이 좋습니다.",
+        post3_p2: "저희 메뉴 추천 리스트에 '샐러드', '비빔밥', '단백질 위주 식단'을 포함시켜 보세요. 무작위 추천 속에서도 건강을 챙길 수 있는 현명한 리스트 관리가 필요합니다."
     },
     en: {
+        blog_link: "Blog",
         animal_test_link: "Animal Face Test",
         home_link: "Home",
         lang_toggle: "한국어",
@@ -201,7 +217,21 @@ const translations = {
         delete_btn: "Delete",
         confirm_reset: "Reset all menus?",
         alert_no_menu: "Please enter menu candidates first!",
-        camera_error: "Unable to access camera. Please check permissions."
+        camera_error: "Unable to access camera. Please check permissions.",
+        // Blog specific
+        blog_page_title: "Blog | What to Eat Today?",
+        blog_title: "Food & Life Blog",
+        blog_subtitle: "Useful guides and stories for better decisions",
+        blog_preview_title: "Latest Blog Posts",
+        post1_title: "The Science of 'Random Choice' to Overcome Indecision",
+        post1_p1: "We face countless choices every day. Among them, the 'What to Eat Today?' dilemma has become a major stressor for modern people. Psychologists call this the 'Paradox of Choice'—where too many options lead to decreased satisfaction and increased anxiety.",
+        post1_p2: "In such cases, using a random menu recommendation tool is an efficient way to reduce mental fatigue. By delegating decision-making to the system, you give your brain a rest and gain the joy of encountering unexpected menus.",
+        post2_title: "AI Analysis: The Secrets Hidden in Your Face",
+        post2_p1: "With the advancement of AI technologies like Google's Teachable Machine, services that analyze animal faces from images are gaining popularity. AI learns from tens of thousands of data points to precisely analyze eye angles, nose height, and lip shapes.",
+        post2_p2: "Puppy faces usually give a soft and friendly impression, while cat faces exude a chic and sophisticated charm. These AI tests are becoming more than just fun; they're useful tools for objectively understanding your own first impression.",
+        post3_title: "Healthy Lunch Guide for Office Workers",
+        post3_p1: "Quick meals during busy work hours can decrease afternoon productivity. A healthy lunch requires a balance of carbohydrates, proteins, and fats. It's especially good to start with fiber-rich vegetable side dishes to prevent blood sugar spikes.",
+        post3_p2: "Try including 'Salad', 'Bibimbap', or 'Protein-focused meals' in our recommendation list. Wise list management is key to maintaining health even within random recommendations."
     }
 };
 
