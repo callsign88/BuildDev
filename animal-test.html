@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강아지상 vs 고양이상 테스트</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <button id="theme-toggle" class="theme-btn" aria-label="다크모드 토글">🌙</button>
+            </div>
+            <h1>강아지상 vs 고양이상 테스트</h1>
+            <p>내 얼굴은 어떤 동물상일까요?<br>사진을 업로드해 확인해보세요!</p>
+        </header>
+
+        <main>
+            <section class="card-section" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
+                <div class="test-ui">
+                    <input type="file" id="image-upload" accept="image/*" class="file-input">
+                    <label for="image-upload" class="primary-btn">사진 업로드하기</label>
+                    <div id="image-preview-container" class="hidden">
+                        <img id="image-preview" alt="업로드된 사진">
+                    </div>
+                    <div id="label-container"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="animal-test.js"></script>
+</body>
+</html>
